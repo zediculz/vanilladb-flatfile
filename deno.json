@@ -1,0 +1,13 @@
+{
+  "name": "@vanilladb/main",
+  "version": "0.1.3",
+  "license": "MIT",
+  "exports": "./main.ts",
+  "tasks": {
+    "dev": "deno run --watch -RW main.ts",
+    "slow": "deno run -RW main.ts"
+  },
+  "imports": {
+    "@vanilladb/main": "jsr:@vanilladb/main@^0.1.3"
+  }
+}
