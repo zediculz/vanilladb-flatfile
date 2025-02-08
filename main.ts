@@ -1,3 +1,4 @@
+// deno-lint-ignore-file
 import type { DBCONFIG } from "./type.ts"
 
 
@@ -45,20 +46,45 @@ class VanillaDb {
     }
 
     async query(querystr:string):Promise<void> {
-        
+        const sql = querystr.split(" ")
+        const action = sql[0]
+        const whereToAct = sql[1]
+        const [option, value] = sql[2].split("=")
+        console.log(option, value)
+
+        if (action === "select" && whereToAct === "where") {
+            const oD = await this.#load()
+            const datas = oD.data
+
+            if (option !== "index") {
+                const filter = datas.filter((data:any) => {
+                    if (data.hasOwnProperty(option) && data[option] === value) {
+                        return data
+                    } else if (data.hasOwnProperty(option) && typeof data[option] === 'number') {
+                        const check = data[option] === Number(value) ? data : []
+                        return check
+                    }
+                })
+
+                return filter[0]
+            } else {
+                const indexData = datas[value]
+                const iD = indexData === undefined ? [] : indexData
+                return iD
+            }
+        }
     }
 
     //update the initial data by adding bew data
-    async insert(newData: any):Promise<void> {
-       
+    async insert(newData: any): Promise<void> {
         const oD = await this.#load()
         const nDArray = [newData, ...oD.data]
         const nData = { key: oD.key, data: nDArray }
-        this.#write(nData)
+        await this.#write(nData)
     }
 
     #yap(status:string) {
-        console.log(`[Db::${status}]`)
+        console.log(`[VanillaDb::${status}]`)
     }
 
     async #write(defaultData:any) {
@@ -75,6 +101,7 @@ class VanillaDb {
         const data = JSON.parse(sD)
         return data
     }
+
 }
 
 
