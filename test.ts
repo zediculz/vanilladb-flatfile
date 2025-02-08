@@ -10,12 +10,7 @@ const config = {
 
 const db = await vanilladb.init(config)
 
-const user = {
-    name: "jay",
-    age: 16
-}
 
-//await db.insert(user)
 
 const ds = await db.get()
 
@@ -26,7 +21,7 @@ const ress = await db.query("select where index=1")
 
 
 //console.log(re)
-console.log(res)
+//console.log(res)
 //console.log(ress)
 
 const ur = JSON.stringify({
@@ -37,5 +32,13 @@ const ur = JSON.stringify({
 //const r = await db.query(`update where index=2 value=${ur}`)
 
 
-const d = await db.query(`delete where index=2`)
-console.log(d)
+
+//const d = await db.query(`delete where index=20`)
+
+
+const user = {
+    name: "ja",
+    age: 56
+}
+
+await db.insert(user)

@@ -112,6 +112,23 @@ class VanillaDb {
             const datas = oD.data
            
             if (option === "index" || option === "id") {
+                const indexValue = Number(value)
+                const filtered = datas.filter((data: any, i:number) => {
+                    if(i !== indexValue) return data
+                })
+
+                const check = datas[indexValue]
+                if (check !== undefined) {
+                    const nD = {
+                        key: oD.key,
+                        data: filtered
+                    }
+
+                    await this.#write(nD)
+                    return `index: ${indexValue} deleted`
+                } else {
+                    return "non-existing index"
+                }
                 
             }
         }
