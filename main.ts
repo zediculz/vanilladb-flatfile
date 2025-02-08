@@ -45,32 +45,74 @@ class VanillaDb {
         return data.data
     }
 
-    async query(querystr:string):Promise<void> {
+    async query(querystr:string):Promise<any> {
         const sql = querystr.split(" ")
         const action = sql[0]
         const whereToAct = sql[1]
         const [option, value] = sql[2].split("=")
-        console.log(option, value)
 
         if (action === "select" && whereToAct === "where") {
             const oD = await this.#load()
+           
             const datas = oD.data
 
             if (option !== "index") {
                 const filter = datas.filter((data:any) => {
-                    if (data.hasOwnProperty(option) && data[option] === value) {
-                        return data
-                    } else if (data.hasOwnProperty(option) && typeof data[option] === 'number') {
-                        const check = data[option] === Number(value) ? data : []
-                        return check
-                    }
+                    if (data.hasOwnProperty(option)) {
+                        if (typeof data[option] === "number") {
+                            if (data[option] === Number(value)) {
+                                return data
+                            }
+                        } else {
+                            if (data[option] === value) {
+                                return data
+                            }
+                        }
+                    } 
                 })
 
-                return filter[0]
+               
+                const fD = filter.length > 1 ? filter : filter[0]
+                return fD
             } else {
                 const indexData = datas[value]
                 const iD = indexData === undefined ? [] : indexData
                 return iD
+            }
+        }
+
+        if (action === "update" && whereToAct === "where") {
+
+            const oD = await this.#load()
+            const datas = oD.data
+
+            const updateValue = sql[3].split("=")
+            const newData = JSON.parse(updateValue[1])
+           
+            if (option === "index" || option === "id") {
+
+                if (datas[value] !== undefined) {
+                    datas[value] = newData
+                    const nD = {
+                        key: oD.key,
+                        data: datas
+                    }
+
+                    await this.#write(nD)
+                    return `index: ${value} updated`
+                } else {
+                    return "non-existing index"
+                }
+            }
+        }
+
+        if (action === "delete" && whereToAct === "where") {
+
+            const oD = await this.#load()
+            const datas = oD.data
+           
+            if (option === "index" || option === "id") {
+                
             }
         }
     }
@@ -83,11 +125,11 @@ class VanillaDb {
         await this.#write(nData)
     }
 
-    #yap(status:string) {
+    #yap(status:string):void {
         console.log(`[VanillaDb::${status}]`)
     }
 
-    async #write(defaultData:any) {
+    async #write(defaultData:any):Promise<void> {
         const dD = JSON.stringify(defaultData, null, 2)
         const encoder = new TextEncoder()
         const data = encoder.encode(dD)
