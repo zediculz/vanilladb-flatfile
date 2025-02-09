@@ -10,35 +10,11 @@ const config = {
 
 const db = await vanilladb.init(config)
 
+//const q = await db.query(`delete where id=0`)
+//const qq = await db.query(`update where id=0 value=6`)
+//const qqq = await db.query("select where index=10")
 
+//console.log(qqq)
 
 const ds = await db.get()
-
-
-const re = await db.query("select where name=jacob")
-const res = await db.query("select where age=28")
-const ress = await db.query("select where index=1")
-
-
-//console.log(re)
-//console.log(res)
-//console.log(ress)
-
-const ur = JSON.stringify({
-    name: "paul",
-    age: 28
-})
-
-//const r = await db.query(`update where index=2 value=${ur}`)
-
-
-
-//const d = await db.query(`delete where index=20`)
-
-
-const user = {
-    name: "ja",
-    age: 56
-}
-
-await db.insert(user)
+console.log(ds)

@@ -1,25 +1,17 @@
 {
-  "key": "app-data-01",
-  "data": [
-    {
-      "name": "ja",
-      "age": 56
-    },
-    {
-      "name": "ja",
-      "age": 56
-    },
-    {
-      "name": "jay",
-      "age": 56
-    },
-    {
-      "name": "jimmy",
-      "age": 28
-    },
-    {
-      "name": "ray",
-      "age": 46
-    }
-  ]
+ "key": "app-data-01",
+ "data": [
+  [],
+  true,
+  {
+   "name": "john doe",
+   "age": "54"
+  },
+  10,
+  100,
+  800,
+  80,
+  8,
+  6
+ ]
 }
