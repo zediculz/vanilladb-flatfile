@@ -58,7 +58,6 @@ class VanillaDb {
   */
   async set(newData: any): Promise<void> {
     const oD = await this.#read();
-    console.log(oD)
     const nDArray = [newData, ...oD.data];
     const nData = { data: nDArray };
     await this.#write(nData);
