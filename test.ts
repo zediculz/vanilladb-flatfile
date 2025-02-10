@@ -1,20 +1,15 @@
 
 //import vanilladb from "@vanilladb/main"
-import vanilladb from "./main.ts"
+import VanillaDb from "./main.ts"
 
-const config = {
-    file: "data.json",
-    key: "app-data-01",
-    defaultData: []
-}
 
-const db = await vanilladb.init(config)
+const db = new VanillaDb("data.json")
 
 //const q = await db.query(`delete where id=0`)
 //const qq = await db.query(`update where id=0 value=6`)
-//const qqq = await db.query("select where index=10")
+const qqq = await db.query("select where index=0")
 
-//console.log(qqq)
+console.log(qqq)
 
-const ds = await db.get()
-console.log(ds)
+const d = await db.get()
+console.log(d)
