@@ -14,8 +14,7 @@ class VanillaDb {
   private config: DBCONFIG;
 
   /**
-   * Create a new VanillaDb with the given config.
-   * config parameters will be
+   * Create a new VanillaDb with the file name.
    * @param file The name file db.
    */
   constructor(file: string) {
@@ -47,14 +46,16 @@ class VanillaDb {
   }
 
   //get all the stored datas
-  /** Get All Data from Db. */
+  /** Get All Data from Db.   */
   async get(): Promise<any> {
     const data = await this.#read();
     return data.data;
   }
 
   //set data, append new data
-  /** Set store new Data to Db by appending  */
+  /** Set store new Data to Db by appending  
+   * * @param newData new data to store in Db.
+  */
   async set(newData: any): Promise<void> {
     const oD = await this.#read();
     console.log(oD)
@@ -63,9 +64,9 @@ class VanillaDb {
     await this.#write(nData);
   }
 
-  /** Query uses querystring to get data from db e,g
-   * db.query("select where index=0") return the data in index 0
-   * select, update and delete query are accept
+  /** Query uses query string to get data from db e,g
+   *  db.query("select where index=0") return the data in index 0
+   *   select, update and delete query are accept
   */
   async query(querystr: string): Promise<any> {
     const sql = querystr.split(" ");
