@@ -1,20 +1,19 @@
 {
   "version": "4",
   "specifiers": {
-    "jsr:@vanilladb/main@~0.1.2": "0.1.3",
-    "jsr:@vanilladb/main@~0.1.3": "0.1.3"
+    "jsr:@vanilladb/main@~0.1.6": "0.1.6"
   },
   "jsr": {
     "@vanilladb/main@0.1.2": {
       "integrity": "63c9051338c88b0a90ccac9e7afa16cb75efc3ac0b65df0c422f43a6c8b4930f"
     },
-    "@vanilladb/main@0.1.3": {
-      "integrity": "9524cd4ada5732a60562deb89a39006aba6723d6ba83f73051b2a5e7d95fe560"
+    "@vanilladb/main@0.1.6": {
+      "integrity": "bfb4d7fa0963fb3bd8157cb44fed14da6b5ab6a55e7a1b3c316dbf7a0fc5eb91"
     }
   },
   "workspace": {
     "dependencies": [
-      "jsr:@vanilladb/main@~0.1.3"
+      "jsr:@vanilladb/main@~0.1.6"
     ]
   }
 }

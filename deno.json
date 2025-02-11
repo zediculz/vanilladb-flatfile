@@ -9,6 +9,6 @@
     "test": "deno run --watch -RW test.ts"
   },
   "imports": {
-    
+    "@vanilladb/main": "jsr:@vanilladb/main@^0.1.6"
   }
 }

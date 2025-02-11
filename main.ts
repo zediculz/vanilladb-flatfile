@@ -1,28 +1,26 @@
 // deno-lint-ignore-file
-
-export type DBCONFIG = {
-  file: string;
-  defaultData: any[];
-};
+import type { DBCONFIG } from './types.ts'
 
 /**
  * A class to represent a VanillaDb flatFile Database.
  */
 
 class VanillaDb {
-   /** The config of the database. */
+  /** The config of the database. */
   private config: DBCONFIG;
 
   /**
-   * Create a new VanillaDb with the file name.
-   * @param file The name file db.
+   * Create new VanillaDb with the name of your database file name, 
+   * VanillaDb will create new file with the filename
+   * @param filename database file name e.g "data.json" or "/db/data.json" if folder already exist
+   * @param defaultData the default data to store while initializing db, mostly array
    */
-  constructor(file: string) {
-    this.config = {file: file, defaultData: [] };
+  constructor(filename: string, defaultData:any = []) {
+    this.config = {file: filename, defaultData: defaultData };
     this.#init()
   }
 
-  /* initialize to start new db or load existing db */
+  //initialize to start new db or load existing db 
   async #init(): Promise<VanillaDb> {
     try {
       const fstat = await Deno.lstat(this.config.file);
@@ -37,7 +35,7 @@ class VanillaDb {
       this.#yap(`loaded`);
 
       const dD = {
-        data: []
+        data: this.config.defaultData
       };
 
       await this.#write(dD);
@@ -45,16 +43,18 @@ class VanillaDb {
     }
   }
 
-  //get all the stored datas
-  /** Get All Data from Db.   */
+  /**
+   * get return all datas in db
+  */
   async get(): Promise<any> {
     const data = await this.#read();
     return data.data;
   }
 
-  //set data, append new data
-  /** Set store new Data to Db by appending  
-   * * @param newData new data to store in Db.
+  /** set store new data to db
+   * vanillaDb append new data to the begining by merging together all datas
+   * @param newData new data to store in db
+   * @param newData can be an array, object, string and numbers
   */
   async set(newData: any): Promise<void> {
     const oD = await this.#read();
@@ -141,19 +141,28 @@ class VanillaDb {
           };
 
           await this.#write(nD);
-          return `index: ${indexValue} deleted`;
+          this.#yap(`index: ${indexValue} deleted`)
+          return true
         } else {
-          return "non-existing index";
+          return false
         }
       }
     }
   }
 
+
+  /**
+   * db activities logger
+  */
   #yap(status: string, option: string = "s"): void {
     const color = option === "s" ? "lime" : "red";
     console.log(`%c[vanillaDb: ${status}]`, `color: ${color}`);
   }
 
+
+  /**
+   * helper to write db
+  */
   async #write(defaultData: any): Promise<void> {
     const dD = JSON.stringify(defaultData, null, 1);
     const encoder = new TextEncoder();
@@ -161,6 +170,9 @@ class VanillaDb {
     await Deno.writeFile(this.config.file, data);
   }
 
+  /**
+   * helper to read db
+  */
   async #read(): Promise<any> {
     const fileData = await Deno.readFile(this.config.file);
     const decoder = new TextDecoder();
