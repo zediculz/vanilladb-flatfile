@@ -63,15 +63,18 @@ class VanillaDb {
     await this.#write(nData);
   }
 
-  /** Query uses query string to get data from db e,g
-   *  db.query("select where index=0") return the data in index 0
-   *   select, update and delete query are accept
+  /** 
+   * @param querystring query uses querystring to get data from db eg
+   *  to select data with index 0 the query string will be db.query("select where index=0") return the data in index 0
+   *   query can be used to select data and delete data with index or id eb "delete where id=0" remove data from index 0
+   * query can also be used to update data eg "update where id=0 value=newdata"
   */
-  async query(querystr: string): Promise<any> {
-    const sql = querystr.split(" ");
-    const action = sql[0];
-    const whereToAct = sql[1];
-    const [option, value] = sql[2].split("=");
+  async query(querystring: string): Promise<any> {
+    
+    const sql = querystring === "" ? "" : querystring.split(" ");
+    const action = querystring === "" ? "" : sql[0];
+    const whereToAct = querystring === "" ? ""  : sql[1];
+    const [option, value] = querystring === "" ? ""  : sql[2].split("=");
 
     const oD = await this.#read();
     const datas = oD.data;

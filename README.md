@@ -18,15 +18,24 @@ deno add jsr:@vanilladb/main
 
 ### Basic Class Example
 ```javascript
+
 import VanillaDb from "@vanilladb/main";
 
 //create VanillaDb
 const db = new VanillaDb("data.json")
 
+//set store new data in db
+await db.set({
+    id: 0, 
+    name: 'john doe'
+})
 
+//get returns data in db
 const datas = await db.get()
-```
 
+//querystring query uses querystring to get data from db
+const result = await db.query("select where index=2")
+```
 
 # License
 
