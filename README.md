@@ -35,6 +35,8 @@ const datas = await db.get()
 
 //querystring query uses querystring to get data from db
 const result = await db.query("select where index=2")
+const done = await db.query("update where index=2 value='newdata'")
+
 ```
 
 # License
