@@ -1,4 +1,4 @@
-[![JSR](https://jsr.io/badges/@<vanilladb>/<main>)](https://jsr.io/@<vanilladb>/<main>)
+[![JSR](https://jsr.io/badges/@vanilladb/main)](https://jsr.io/@vanilladb/main)
 
 # VanillaDb
 
