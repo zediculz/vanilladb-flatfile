@@ -15,8 +15,13 @@ class VanillaDb {
    * @param filename database file name e.g "data.json" or "/db/data.json" if folder already exist
    * @param defaultData the default data to store while initializing db, mostly array
    */
-  constructor(filename: string, defaultData:any = []) {
-    this.config = {file: filename, defaultData: defaultData };
+  constructor(filename: string, defaultData:any) {
+    if (defaultData === null || defaultData === undefined) {
+       this.config = {file: filename, defaultData: [] };
+    } else {
+       this.config = {file: filename, defaultData: defaultData };
+    }
+    
     this.#init()
   }
 
