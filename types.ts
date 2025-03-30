@@ -1,5 +1,5 @@
 export type DBCONFIG = {
   file: string;
-  defaultData: any[];
+  defaultData?: any[];
   log?: boolean
 };
