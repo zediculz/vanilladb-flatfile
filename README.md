@@ -21,10 +21,13 @@ deno add jsr:@vanilladb/main
 
 import VanillaDb from "@vanilladb/main";
 
+
 //create VanillaDb
 const db = new VanillaDb({
-    file: "users.json",
-    label: "users",
+    file: "filename.json",
+    label: "db",
+    defaultData: [],
+    log: true
 })
 
 //set store new data in db

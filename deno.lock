@@ -1,7 +1,7 @@
 {
   "version": "4",
   "specifiers": {
-    "jsr:@vanilladb/main@~0.2.2": "0.2.2"
+    "jsr:@vanilladb/main@~0.2.2": "0.3.0"
   },
   "jsr": {
     "@vanilladb/main@0.1.2": {

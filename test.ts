@@ -6,7 +6,8 @@ import VanillaDb from "./main.ts"
 const db = new VanillaDb({
     file: "filename.json",
     label: "db",
-    defaultData: []
+    defaultData: [],
+    log: true
 })
 
 console.log(db)

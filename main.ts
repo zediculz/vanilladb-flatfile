@@ -1,23 +1,28 @@
 // deno-lint-ignore-file
-import { DBCONFIG } from './types.ts'
-
+export interface DBConfig {
+  file: string;
+  defaultData?: any[];
+  log?: boolean
+  label?: string
+  size?:string
+};
 /**
  * A class to represent a VanillaDb flatFile Database.
  */
 
 class VanillaDb {
   /** The config of the database. */
-  private config: DBCONFIG;
+  private config: DBConfig;
 
    /**
-   * Create new VanillaDb with the name of your database file name, 
-   * VanillaDb will create new file with the filename
+   * Create new VanillaDb with the name of your database file, 
+   * VanillaDb will create new file with the name, you can also add label and defaultData which should be an Array Data.
    * @param {string} config.file database file name e.g "data.json" or "/db/data.json" if folder already exist
    * @param config.defaultData the default data to store while initializing db, most be an array
    * @param {string} config.label label your database useful when using vanilladb with multiple files
    * @param {boolean} config.log  log vanilladb actions, true by default
    */
-  constructor(config: DBCONFIG) {
+  constructor(config: DBConfig) {
     this.config = config
     this.config.defaultData = config.defaultData == undefined ? [] : config.defaultData
     this.config.log = config.log == undefined ? true : config.log
