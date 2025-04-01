@@ -4,9 +4,6 @@
     "jsr:@vanilladb/main@~0.2.2": "0.3.0"
   },
   "jsr": {
-    "@vanilladb/main@0.1.2": {
-      "integrity": "63c9051338c88b0a90ccac9e7afa16cb75efc3ac0b65df0c422f43a6c8b4930f"
-    },
     "@vanilladb/main@0.2.2": {
       "integrity": "3bdb0c33edc4f77e1612ba98d242923ecefa8079da55d5bcddf061be635652fb"
     }
