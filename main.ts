@@ -1,4 +1,9 @@
 // deno-lint-ignore-file
+
+/**
+ * VanillaDb config.
+ */
+
 export interface DBConfig {
   file: string;
   defaultData?: any[];
@@ -6,6 +11,8 @@ export interface DBConfig {
   label?: string
   size?:string
 };
+
+
 /**
  * A class to represent a VanillaDb flatFile Database.
  */
@@ -126,7 +133,7 @@ class VanillaDb {
 
     if (action === "update" && whereToAct === "where") {
       const updateValue = sql[3].split("=");
-      const newData = JSON.parse(updateValue[1]);
+      const newData = updateValue[1];
 
       if (option === "index" || option === "id") {
         if (datas[value] !== undefined) {
