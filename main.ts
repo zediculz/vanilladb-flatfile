@@ -144,7 +144,7 @@ class VanillaDb {
           };
 
           await this.#write(nD);
-          this.#yap(`${value} updated`);
+          this.#yap(`${value} [${this.config.label}] updated`);
           return true;
         } else {
           this.#yap("non-existing index");
